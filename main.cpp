@@ -1,40 +1,29 @@
-#include <fstream>
-#include <sstream>
+Book* search(Book* node, int id) {
+    if (node == nullptr || node->id == id)
+        return node;
+    if (id < node->id)
+        return search(node->left, id);
+    return search(node->right, id);
+}
 
-void saveBooks(Book* node, ofstream& file) {
-    if (node != nullptr) {
-        saveBooks(node->left, file);
-        file << node->id << "," << node->title << "," << node->author << ","
-             << (node->isIssued ? "Issued" : "Available") << endl;
-        saveBooks(node->right, file);
+void Library::issueBook(int id) {
+    Book* book = search(root, id);
+    if (book && !book->isIssued) {
+        book->isIssued = true;
+        saveBooksToFile();
+        cout << "Book issued successfully.\n";
+    } else {
+        cout << "Book not available for issue.\n";
     }
 }
 
-void Library::saveBooksToFile() {
-    ofstream file("books.txt", ios::trunc);
-    saveBooks(root, file);
-    file.close();
-}
-
-void Library::loadBooks() {
-    ifstream file("books.txt");
-    if (!file) {
-        cout << "Error: books.txt not found.\n";
-        return;
+void Library::returnBook(int id) {
+    Book* book = search(root, id);
+    if (book && book->isIssued) {
+        book->isIssued = false;
+        saveBooksToFile();
+        cout << "Book returned successfully.\n";
+    } else {
+        cout << "Invalid return request.\n";
     }
-
-    string line;
-    while (getline(file, line)) {
-        stringstream ss(line);
-        int id;
-        string title, author, status;
-        getline(ss, line, ',');
-        id = stoi(line);
-        getline(ss, title, ',');
-        getline(ss, author, ',');
-        getline(ss, status);
-        bool isIssued = (status == "Issued");
-        root = insert(root, id, title, author, isIssued);
-    }
-    file.close();
 }
