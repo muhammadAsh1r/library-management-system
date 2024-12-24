@@ -1,0 +1,15 @@
+1,1984,George Orwell,Available
+2,Brave New World,Aldous Huxley,Available
+3,The Catcher in the Rye,J.D. Salinger,Available
+4,To Kill a Mockingbird,Harper Lee,Available
+5,The Great Gatsby,F. Scott Fitzgerald,Available
+6,Moby Dick,Herman Melville,Available
+7,War and Peace,Leo Tolstoy,Available
+8,Pride and Prejudice,Jane Austen,Available
+9,The Hobbit,J.R.R. Tolkien,Issued
+10,Crime and Punishment,Fyodor Dostoevsky,Available
+11,The Alchemist,Paulo Coelho,Available
+12,Harry Potter and the Philosopher's Stone,J.K. Rowling,Issued
+13,The Road,Cormac McCarthy,Available
+14,Jane Eyre,Charlotte Brontë,Issued
+15,James Bond,E.I. Sam,Available
