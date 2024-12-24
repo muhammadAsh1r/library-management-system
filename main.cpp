@@ -28,6 +28,16 @@ private:
         return node;
     }
 
+    void inOrder(Book* node) {
+        if (node != nullptr) {
+            inOrder(node->left);
+            cout << "ID: " << node->id << ", Title: " << node->title
+                 << ", Author: " << node->author
+                 << ", Status: " << (node->isIssued ? "Issued" : "Available") << endl;
+            inOrder(node->right);
+        }
+    }
+
 public:
     Library() : root(nullptr) {}
 
@@ -35,9 +45,17 @@ public:
         root = insert(root, id, title, author, isIssued);
         cout << "Book added successfully.\n";
     }
+
+    void displayBooks() {
+        cout << "Books List:\n";
+        inOrder(root);
+    }
 };
 
 int main() {
     Library library;
+    library.addBook(1, "Book One", "Author A", false);
+    library.addBook(2, "Book Two", "Author B", true);
+    library.displayBooks();
     return 0;
 }
