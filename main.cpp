@@ -189,79 +189,85 @@ int main() {
     // Load books from the file
     library.loadBooks();
 
-    int roleChoice;
-    cout << "Welcome to Library Management System\n";
-    cout << "1. Admin\n2. User\n";
-    cout << "Enter your role: ";
-    cin >> roleChoice;
+    while (true) { // Outer loop for role menu
+        int roleChoice;
+        cout << "\nWelcome to Library Management System\n";
+        cout << "1. Admin\n2. User\n3. Exit\n";
+        cout << "Enter your role: ";
+        cin >> roleChoice;
 
-    if (roleChoice == 1) { // Admin Menu
-        int adminChoice;
-        while (true) {
-            cout << "\nAdmin Menu:\n";
-            cout << "1. Add Book\n2. Remove Book\n3. Display All Books\n4. Exit\n";
-            cout << "Enter your choice: ";
-            cin >> adminChoice;
+        if (roleChoice == 1) { // Admin Menu
+            int adminChoice;
+            while (true) {
+                cout << "\nAdmin Menu:\n";
+                cout << "1. Add Book\n2. Remove Book\n3. Display All Books\n4. Back to Role Menu\n";
+                cout << "Enter your choice: ";
+                cin >> adminChoice;
 
-            if (adminChoice == 1) {
-                int id;
-                string title, author;
-                cout << "Enter book ID: ";
-                cin >> id;
-                cin.ignore();
-                cout << "Enter book title: ";
-                getline(cin, title);
-                cout << "Enter book author: ";
-                getline(cin, author);
-                library.addBook(id, title, author, false);
-            } else if (adminChoice == 2) {
-                int id;
-                cout << "Enter book ID to remove: ";
-                cin >> id;
-                library.removeBook(id);
-            } else if (adminChoice == 3) {
-                library.displayBooks();
-            } else if (adminChoice == 4) {
-                cout << "Exiting Admin Menu...\n";
-                break;
-            } else {
-                cout << "Invalid choice. Try again.\n";
+                if (adminChoice == 1) {
+                    int id;
+                    string title, author;
+                    cout << "Enter book ID: ";
+                    cin >> id;
+                    cin.ignore();
+                    cout << "Enter book title: ";
+                    getline(cin, title);
+                    cout << "Enter book author: ";
+                    getline(cin, author);
+                    library.addBook(id, title, author, false);
+                } else if (adminChoice == 2) {
+                    int id;
+                    cout << "Enter book ID to remove: ";
+                    cin >> id;
+                    library.removeBook(id);
+                } else if (adminChoice == 3) {
+                    library.displayBooks();
+                } else if (adminChoice == 4) {
+                    cout << "Returning to Role Menu...\n";
+                    break;
+                } else {
+                    cout << "Invalid choice. Try again.\n";
+                }
             }
-        }
-    } else if (roleChoice == 2) { // User Menu
-        int userChoice;
-        while (true) {
-            cout << "\nUser Menu:\n";
-            cout << "1. Display All Books\n2. Filter by Available Books\n3. Filter by Issued Books\n4. Issue Book\n5. Return Book\n6. Exit\n";
-            cout << "Enter your choice: ";
-            cin >> userChoice;
+        } else if (roleChoice == 2) { // User Menu
+            int userChoice;
+            while (true) {
+                cout << "\nUser Menu:\n";
+                cout << "1. Display All Books\n2. Filter by Available Books\n3. Filter by Issued Books\n4. Issue Book\n5. Return Book\n6. Back to Role Menu\n";
+                cout << "Enter your choice: ";
+                cin >> userChoice;
 
-            if (userChoice == 1) {
-                library.displayBooks();
-            } else if (userChoice == 2) {
-                library.displayBooks(true, false); // Only available books
-            } else if (userChoice == 3) {
-                library.displayBooks(false, true); // Only issued books
-            } else if (userChoice == 4) {
-                int id;
-                cout << "Enter book ID to issue: ";
-                cin >> id;
-                library.issueBook(id);
-            } else if (userChoice == 5) {
-                int id;
-                cout << "Enter book ID to return: ";
-                cin >> id;
-                library.returnBook(id);
-            } else if (userChoice == 6) {
-                cout << "Exiting User Menu...\n";
-                break;
-            } else {
-                cout << "Invalid choice. Try again.\n";
+                if (userChoice == 1) {
+                    library.displayBooks();
+                } else if (userChoice == 2) {
+                    library.displayBooks(true, false); // Only available books
+                } else if (userChoice == 3) {
+                    library.displayBooks(false, true); // Only issued books
+                } else if (userChoice == 4) {
+                    int id;
+                    cout << "Enter book ID to issue: ";
+                    cin >> id;
+                    library.issueBook(id);
+                } else if (userChoice == 5) {
+                    int id;
+                    cout << "Enter book ID to return: ";
+                    cin >> id;
+                    library.returnBook(id);
+                } else if (userChoice == 6) {
+                    cout << "Returning to Role Menu...\n";
+                    break;
+                } else {
+                    cout << "Invalid choice. Try again.\n";
+                }
             }
+        } else if (roleChoice == 3) { // Exit Program
+            cout << "Exiting the Library Management System. Goodbye!\n";
+            break;
+        } else {
+            cout << "Invalid role selection. Try again.\n";
         }
-    } else {
-        cout << "Invalid role selection.\n";
     }
 
     return 0;
 }
+
