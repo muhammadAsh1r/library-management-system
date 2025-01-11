@@ -140,10 +140,20 @@ public:
 
 
     void removeBook(int id) {
+    try {
+        while (search(root, id) == nullptr) {
+            cout << "Error: A book with ID " << id << " does not exist.\n";
+            cout << "Please enter a valid book ID to remove: ";
+            cin >> id;
+        }
         root = deleteBook(root, id);
         saveBooksToFile();
         cout << "Book removed successfully.\n";
+    } catch (const exception& e) {
+        cout << "An unexpected error occurred: " << e.what() << endl;
     }
+}
+
 
     void displayBooks(bool filterAvailable = false, bool filterIssued = false) {
         cout << "Books List:\n";
