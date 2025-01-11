@@ -124,10 +124,20 @@ public:
     }
 
     void addBook(int id, string title, string author, bool isIssued) {
+    try {
+        while (search(root, id) != nullptr) {
+            cout << "Error: A book with ID " << id << " already exists. Please use a different ID.\n";
+            cout << "Enter a new ID for the book: ";
+            cin >> id;
+        }
         root = insert(root, id, title, author, isIssued);
         saveBooksToFile();
         cout << "Book added successfully.\n";
+    } catch (const exception& e) {
+        cout << "An unexpected error occurred: " << e.what() << endl;
     }
+}
+
 
     void removeBook(int id) {
         root = deleteBook(root, id);
